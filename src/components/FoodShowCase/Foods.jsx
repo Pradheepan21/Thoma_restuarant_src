@@ -9,7 +9,11 @@ const Foods = () => {
     const [loading, setLoading] = useState(false);
     const [foods] = useFetch();
     const [currentPage, setCurrentPage] = useState(1);
+<<<<<<< HEAD
     const itemsPerPage = 6; // Number of items to display per page
+=======
+    const itemsPerPage = 9; // Number of items to display per page
+>>>>>>> 75852d355f4fadcada072ebaab96ce90b14c0433
 
     // Loading
     useEffect(() => {

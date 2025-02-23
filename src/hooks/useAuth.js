@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../config/firebase';
 import {
@@ -163,6 +164,26 @@ const useAuth = () => {
     };
 
     return { user, signUpUser, signInUser, signInWithGoogle, signOutUser }; // Return user and authentication methods
+=======
+import { auth } from '../config/firebase'; // Adjust the path as needed
+
+const useAuth = () => {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((authUser) => {
+            if (authUser) {
+                setUser(authUser);
+            } else {
+                setUser(null);
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    return user;
+>>>>>>> 75852d355f4fadcada072ebaab96ce90b14c0433
 };
 
 export default useAuth;

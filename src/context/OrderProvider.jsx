@@ -27,6 +27,10 @@ const OrderProvider = ({ children }) => {
         })
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 75852d355f4fadcada072ebaab96ce90b14c0433
     const value = {
         setOrder,
         order,

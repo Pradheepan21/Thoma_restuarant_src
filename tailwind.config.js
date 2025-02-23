@@ -5,6 +5,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+<<<<<<< HEAD
     extend: {
       colors: {
         border: "hsl(var(--border))",
@@ -51,6 +52,9 @@ export default {
         "float-delayed": "floatDelayed 6s ease-in-out infinite",
       },
     },
+=======
+    extend: {},
+>>>>>>> 75852d355f4fadcada072ebaab96ce90b14c0433
   },
   plugins: [],
 }
