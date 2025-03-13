@@ -9,11 +9,7 @@ const Foods = () => {
     const [loading, setLoading] = useState(false);
     const [foods] = useFetch();
     const [currentPage, setCurrentPage] = useState(1);
-<<<<<<< HEAD
     const itemsPerPage = 6; // Number of items to display per page
-=======
-    const itemsPerPage = 9; // Number of items to display per page
->>>>>>> 75852d355f4fadcada072ebaab96ce90b14c0433
 
     // Loading
     useEffect(() => {
@@ -23,15 +19,8 @@ const Foods = () => {
         }, 1000);
     }, []);
 
-    // Food menu tab
-    const handleMenuTabs = (type) => {
-        setMenuTab(type);
-        setCurrentPage(1); // Reset to the first page when the tab changes
-    };
-
     // Filter foods based on the selected tab
-    const filteredFoods = foods.filter((item) => menuTab === item.foodType);
-
+    const filteredFoods = foods.filter((item) => menuTab === item.type); 
     // Calculate total pages
     const totalPages = Math.ceil(filteredFoods.length / itemsPerPage);
 
@@ -39,6 +28,12 @@ const Foods = () => {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentFoods = filteredFoods.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Food menu tab
+    const handleMenuTabs = (type) => {
+        setMenuTab(type);
+        setCurrentPage(1); // Reset to the first page when the tab changes
+    };
 
     // Handle page change
     const handlePageChange = (page) => {
@@ -71,9 +66,12 @@ const Foods = () => {
 
             {/* All foods */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-                {loading
+            {loading
                     ? Array.from({ length: itemsPerPage }).map((_, index) => <Skeleton key={index} />)
-                    : currentFoods.map((item) => <FoodItem key={item._id} {...item} />)}
+                    : currentFoods.length > 0 
+                        ? currentFoods.map((item) => <FoodItem key={item._id} {...item} />)
+                        : <p className="text-center col-span-full">No foods available.</p>
+                }
             </div>
 
             {/* Pagination */}

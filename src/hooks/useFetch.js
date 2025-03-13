@@ -1,57 +1,39 @@
 import { useEffect, useState } from 'react';
-<<<<<<< HEAD
 import { collection, getDocs } from 'firebase/firestore';
-import { firestore } from '../config/firebase'; // Import firestore from firebase.js
-=======
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import initializeAuthentication from '../config/firebase'; // Adjust the path as needed
->>>>>>> 75852d355f4fadcada072ebaab96ce90b14c0433
+import { firestore } from '../config/firebase'; // Ensure this path is correct
 
 const useFetch = () => {
     const [foods, setFoods] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchFoods = async () => {
             try {
-<<<<<<< HEAD
-                // Fetch data from Firestore
                 const querySnapshot = await getDocs(collection(firestore, 'foods'));
+
+                if (querySnapshot.empty) {
+                    console.warn("No food data found in Firestore.");
+                }
+
                 const foodItems = querySnapshot.docs.map((doc) => ({
                     _id: doc.id,
                     ...doc.data(),
                 }));
 
-                setFoods(foodItems); // Update state with fetched foods
-=======
-                // Initialize Firebase
-                const app = initializeAuthentication();
-                const db = getFirestore(app);
-
-                // Fetch data from Firestore
-                const querySnapshot = await getDocs(collection(db, 'foods'));
-                const foodItems = querySnapshot.docs.map(doc => ({
-                    _id: doc.id,
-                    ...doc.data()
-                }));
+                console.log("Fetched foods:", foodItems); // Debugging log
 
                 setFoods(foodItems);
->>>>>>> 75852d355f4fadcada072ebaab96ce90b14c0433
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching foods:', error);
+                setLoading(false);
             }
         };
 
-<<<<<<< HEAD
-        fetchFoods(); // Call the fetch function
-    }, []);
-
-    return [foods]; // Return the fetched foods
-=======
         fetchFoods();
     }, []);
 
-    return [foods];
->>>>>>> 75852d355f4fadcada072ebaab96ce90b14c0433
+    return [foods, loading]; // Return foods and loading state
 };
 
 export default useFetch;
